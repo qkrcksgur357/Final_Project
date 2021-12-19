@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="errorPSQL">
+
+	<select id="selectErrorPList" resultType="com.kh.spring.errorP.model.vo.ErrorP">
+		SELECT B.*, (SELECT COUNT(*) FROM ATTACHMENT WHERE ERRORPNO = B.errorpNo) FILECOUNT
+		FROM ERRORP B
+	<include refid = "search" />
+		ORDER BY INPUTDATE DESC, ERRORPNO DESC
+	</select>
+	
+<sql id = "search">
+<if test="word != null and word != ''.toString()">
+
+where 1 = 0
+<if test="key == 'CODE'">
+OR PROCODE like '%' || #{word} || '%'
+</if>
+
+<if test="key == 'NAME'">
+OR proname like '%' || #{word} || '%'
+</if>
+
+</if>
+</sql>
+	
+	<select id="selectProCodeList" resultType="com.kh.spring.pd.model.vo.PdVo">
+		SELECT * FROM PRODUCT_MANAGEMENT
+	<include refid = "search" />
+		ORDER BY PROCODE DESC
+	</select>
+	
+	<select id="selectErrorPTotalContents" resultType="int">
+		SELECT COUNT(*) FROM ERRORP
+		<include refid = "search" />
+	</select>
+	
+	<select id="selectProCodeTotalContents" resultType="int">
+		SELECT COUNT(*) FROM PRODUCT_MANAGEMENT
+		<include refid = "search" />
+	</select>
+	
+	<insert id="insertErrorP" parameterType="ErrorP">
+		INSERT INTO ERRORP (ERRORPNO, PROCODE, proname, ERRORPCONTENT, ERRORPCOUNT)
+		VALUES (SEQ_ERRORPNO.NEXTVAL, #{ procode }, #{ proname }, #{ errorpContent }, #{ errorpCount })
+		<!-- <selectKey keyProperty="boardNo" resultType="_int" order="AFTER">
+			SELECT SEQ_BOARDNO.CURRVAL FROM DUAL
+		</selectKey> -->
+	</insert>
+	
+	<insert id="insertAttachment" parameterType="Attachment">
+		<!--  selectKey -->
+		<!-- 다른 테이블의 정보를 외래키로 사용할 경우 참조 연결 -->
+		<selectKey keyProperty="errorpNo" resultType="_int" order="BEFORE">
+			SELECT SEQ_ERRORPNO.CURRVAL FROM DUAL
+		</selectKey>
+		INSERT INTO ATTACHMENT VALUES (SEQ_ATTACHMENTNO.NEXTVAL, 
+		  #{ errorpNo }, #{ originalFileName }, #{ renamedFileName }, 
+		  SYSDATE, 0, 'Y' )
+	</insert>
+	
+	<update id="updateCount" parameterType="ErrorP">
+		UPDATE ERRORP SET ERRORPCOUNT = ERRORPCOUNT + #{ errorpCount } WHERE
+		PROCODE = #{ procode }
+	</update>
+
+	
+	<select id="selectOneErrorP" parameterType="int" resultType="ErrorP">
+		SELECT * FROM ERRORP WHERE ERRORPNO = #{ errorpNo }
+	</select>
+	
+	<select id="selectAttachmentList" parameterType="int" resultType="Attachment">
+		SELECT *FROM ATTACHMENT WHERE ERRORPNO = #{ errorpNo }
+	</select>
+	
+		<select id="checkErrorP" resultType="int" >
+		SELECT COUNT(*) FROM ERRORP WHERE PROCODE = #{ procode }
+		</select>
+	
+	<update id="updateErrorP" parameterType="ErrorP">
+		UPDATE ERRORP SET ERRORPCONTENT = #{ errorpContent }, ERRORPCOUNT = #{ errorpCount }
+		WHERE ERRORPNO = #{ errorpNo }
+	</update>
+	
+	<insert id="updateAttachment" parameterType="Attachment">
+		INSERT INTO ATTACHMENT VALUES (SEQ_ATTACHMENTNO.NEXTVAL, 
+		  #{ errorpNo }, #{ originalFileName }, #{ renamedFileName }, 
+		  SYSDATE, 0, 'Y' )
+	</insert>
+	
+	<delete id="deleteAttachment" parameterType="int">
+		DELETE FROM ATTACHMENT WHERE ERRORPNO = #{ errorpNo } 
+	</delete>
+	
+	
+	<delete id="deleteFile" parameterType="int">
+		DELETE FROM ATTACHMENT WHERE ATTACHMENTNO = #{ attNo }
+	</delete>
+	
+	<delete id="deleteErrorP">
+		DELETE FROM ERRORP WHERE ERRORPNO = #{ errorpNo }
+	</delete>
+	
+	<delete id="AlldeleteErrorP">
+		DELETE FROM ERRORP WHERE ERRORPNO > 0
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

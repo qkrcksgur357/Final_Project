@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+	<!-- #1 Mybatis settings -->
+ 	<settings>
+ 		<setting name="jdbcTypeForNull" value="NULL"/>
+ 		<setting name="cacheEnabled" value="true"/>
+ 		<setting name="mapUnderscoreToCamelCase" value="true"/>
+ 	</settings>
+ 	
+	<!-- #2 Java full package class access to alias -->
+ 	<typeAliases>
+ 		<typeAlias alias="Member" type="com.kh.spring.member.model.vo.Member"/>
+ 		<typeAlias alias="PdVo" type="com.kh.spring.pd.model.vo.PdVo" />	
+ 		<typeAlias alias="InManagement" type="com.kh.spring.in.model.vo.InManagement" />	
+ 		<typeAlias alias="OutManagement" type="com.kh.spring.out.model.vo.OutManagement" />		
+ 		<typeAlias alias="ErrorP" type="com.kh.spring.errorP.model.vo.ErrorP" />	
+ 		<typeAlias alias="QualityI" type="com.kh.spring.qualityI.model.vo.QualityI" />			
+ 		<typeAlias alias="AS" type="com.kh.spring.AS.model.vo.AS" />
+ 		<typeAlias alias="MyTypeHandler" type="com.kh.spring.common.MyTypeHandler" />
+ 		<typeAlias alias="Attachment" type="com.kh.spring.errorP.model.vo.Attachment"/>	
+ 		<typeAlias alias="Utils" type="com.kh.spring.common.Utils"/>	
+ 	</typeAliases>
+ 	
+ 	<typeHandlers>
+ 		<package name="com.kh.spring.common"/>
+ 	</typeHandlers>
+ 	
+ </configuration>

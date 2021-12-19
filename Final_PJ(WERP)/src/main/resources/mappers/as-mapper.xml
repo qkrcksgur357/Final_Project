@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="asSQL">
+
+   <select id="selectASList" resultType="AS">
+      SELECT * FROM AS_MANAGEMENT
+   <include refid="search" /> 
+    	ORDER BY ASCODE DESC
+   </select>
+   
+   <sql id="search">
+		<if test="word != null and word != ''.toString()">
+
+			where 1 = 0
+			<if test="key == 'CODE'">
+				OR PROCODE like '%' || #{word} || '%'
+			</if>
+
+			<if test="key == 'NAME'">
+				OR CUSTOMER like '%' || #{word} || '%'
+			</if>
+
+		</if>
+	</sql>
+   
+   <select id="selectTotalAS" resultType="int">
+      SELECT COUNT(*) FROM AS_MANAGEMENT
+      <include refid="search" />
+   </select>
+   
+   <select id="selectOneAS" parameterType="int" resultType="AS">
+      SELECT * FROM AS_MANAGEMENT WHERE ASCODE = #{asCode}
+   </select>
+   
+   <update id="updateAS" parameterType="AS">
+      UPDATE AS_MANAGEMENT SET ASSTAGE = #{asStage}, ASEXPECTEDDATE = #{asExpectedDate} WHERE ASCODE = #{asCode} 
+   </update>
+   
+   <delete id="deleteAS" parameterType="int">
+      DELETE FROM AS_MANAGEMENT WHERE ASCODE = #{asCode}
+   </delete>
+   
+   <select id="productInfo" parameterType="string" resultType="PdVo">
+      SELECT * FROM PRODUCT_MANAGEMENT
+      WHERE PROCODE = #{ procode }
+   </select>
+   
+</mapper>

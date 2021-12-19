@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="outSQL">
+
+	<insert id="insertOut" parameterType="PdVo">
+		INSERT INTO OUT_MANAGEMENT (OUTCODE, PROCODE, OUTNUM, INPUTDATE)
+		VALUES (OUT_SEQ.NEXTVAL, #{ procode }, #{ outNum }, SYSDATE)
+	</insert>
+
+	<select id="selectoutList" resultType="OutManagement">
+		SELECT *
+		FROM OUT_MANAGEMENT
+		JOIN PRODUCT_MANAGEMENT USING(PROCODE)
+		ORDER BY OUTCODE DESC
+	</select>
+	
+	<select id="getProCodeList" resultType="PdVo">
+		SELECT PROCODE FROM PRODUCT_MANAGEMENT
+	</select>
+	
+	<select id="selectOneOutManagement" parameterType="string" resultType="PdVo">
+		SELECT * FROM PRODUCT_MANAGEMENT 
+		WHERE PROCODE = #{ procode }
+	</select>
+	
+	<update id="updateStock" parameterType="PdVo">
+       UPDATE PRODUCT_MANAGEMENT 
+      SET STOCK = STOCK - #{ outNum } WHERE PROCODE = #{procode}
+   </update>   
+   
+	<select id="selectTotalOut" resultType="int">
+		SELECT COUNT(*) FROM OUT_MANAGEMENT
+	</select>
+	
+	<select id="updateView" parameterType="string" resultType="OutManagement">
+		SELECT * FROM OUT_MANAGEMENT WHERE OUTCODE = #{ outcode }
+	</select>
+	
+	<update id="updateComback" parameterType="PdVo">
+	  UPDATE PRODUCT_MANAGEMENT 
+      SET STOCK = STOCK + #{ outNum } WHERE PROCODE = #{procode}
+	</update>
+	
+	<delete id="deleteList" parameterType="int">
+		DELETE FROM OUT_MANAGEMENT WHERE OUTCODE = #{outcode}
+	</delete>
+
+
+</mapper>

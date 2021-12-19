@@ -1,0 +1,251 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Poppins:wght@300&display=swap');
+/* footer css */
+
+/* footer css */
+
+footer{
+    position: absolute;
+    width: 100%;
+    height: fit-content;
+    top: 900px;
+    left: 0;
+    bottom: 0px;
+    text-align: center;
+    color: black;
+    background: #EFEFEF;
+    padding: 10px;
+
+}
+
+
+body{
+	font-family:'Nanum Gothic', sans-serif;
+}
+
+/* header css */
+header{
+	weight:100%;
+    height: 100px;
+}
+.icon_event{
+
+margin-right: 30px;	
+
+}
+
+.icon_event>ion-icon {
+
+width: 35px;
+height: 35px;
+float: right;
+margin-right: 5px;
+
+}
+
+.top_line {
+
+width:100%;
+height:25px;
+margin-top: 50px;
+
+}
+ .btn btn-outline-success, .btn btn-outline-danger{
+  	background: #12192c;
+  	color: white;
+  }
+  
+/*중복아이디체크관련*/
+		div#userId-container{position:relative; padding:0px;}
+		div#userId-container span.guide {display:none;font-size: 12px;position:absolute; top:8px; right:-25px;}
+		div#userId-container span.ok{color:green;}
+		div#userId-container span.error, span.invalid{color:red;}
+		
+		
+/* 로그인 */
+
+#loginBar{
+	display: inline-flex;
+    padding: 10px;
+    background: #12192c;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    flex-direction: column;
+    border-radius:15px;
+}
+#loginBar #loginTitle{
+	display: inline-grid;
+    grid-template-columns: .25fr 5fr .25fr;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px;
+    background: #424242;
+}
+#loginBar form {
+	display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    align-content: stretch;
+}
+#loginBar form #userId_,#loginBar form #userPwd_{
+	border-radius: 10px;
+    height: 50px;
+    width: auto;
+    border-block-start-color: black;
+    border-block-end-color: initial;
+    border-bottom: outset;
+    padding: 15px;
+    font-size: 1.5em;
+}
+#loginBar label,#loginBar #btnBar>*{
+	      margin: 15px;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 15px;
+}
+#loginBar #loginTitle #closeBtn{
+	display: flex;
+    justify-content: flex-end;
+    color: white;
+    padding-right: 15px;
+}
+#loginBar #loginTitle h2{
+    color: white;
+}
+#loginBar #loginTitle img{
+	width: 45px;
+    height: 45px;
+}
+/*common*/
+input[type="button"]{
+	cursor:pointer;
+}
+/*enroll*/
+#enroll-container{
+	display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;	
+    background:#424242;
+  
+}
+#enroll-container th {
+	float:left;
+	color:white;
+}
+#enroll-container form{
+	padding: 30px;
+    width: -webkit-fill-available;
+    background:#424242;
+    border-radius:15px;
+}
+#enroll-container form table{
+	width: -webkit-fill-available;
+    padding: 0px 30px 0px 30px;
+    
+	
+}
+#enroll-container form table input{
+	width: 520px;
+    height: 30px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    padding-left: 20px;
+    
+}
+#container{
+     justify-content: center;
+    align-items: center;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+    position: fixed;
+ }
+ #enroll-content{
+ padding: 15px;
+    left: 18%;
+    top: 10%;
+    position: absolute;
+    width: 1000px;
+    height: 640px;
+    display: inline;
+    background-color: #12192c;
+    text-align: center;
+ }
+#enroll-title{
+	border: 2px solid gray;
+	font-size: 2em;
+    padding: 15px;
+    background:#424242;
+    border-radius: 15px 15px 15px 15px;
+    margin-bottom: 15px;
+    color:white;
+}
+
+/*member Update*/
+#update-container{
+    padding: 15px;
+    text-align: left;
+}
+ #updateForm{
+ padding:15px;
+ border: 4px solid black;
+    border-style: double;
+    border-radius: 10px;
+ }
+ #updateTable{
+ display:flex;
+ flex-direction: column;
+    align-items: center;
+     margin: 15px;
+    padding: 15px 80px 15px 80px;
+ }
+ #updateTable thead{
+ 	margin-bottom:5px;
+ }
+ #updateTable tbody{
+ 	width: 1000px;
+ }
+ #updateTable tbody input{
+ 	width: 600px;
+    height: 25px;
+    border-radius: 10px 5px 10px 5px;
+    padding-left: 15px;
+ }
+ #updateTable tbody select{
+     margin-right: 200px;
+    width: 200px;
+    border-radius: 10px 5px 10px 5px;
+    }
+ #updateTable tr{
+ 	height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 90px 0px 90px;
+}
+#buttonDiv{
+	text-align: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    font-family:'Nanum Gothic', sans-serif;
+}
+#buttonDiv input{
+	margin: 0px 5px 0px 5px;
+    border-radius: 15px;
+    height: 40px;
+    box-shadow: 4px 5px 5px;
+    font-size: 1.3vw;
+    font-weight: bolder;
+}
+#buttonDiv input:hover{
+	transform: translateY(3px);
+    box-shadow: 0px 0px 0px;
+}
+#buttonDiv input:active{
+	box-shadow: 2px 3px 9px inset;
+    transform: translateY(6px);
+}
+
